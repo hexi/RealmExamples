@@ -1,0 +1,11 @@
+include ':app'
+include ':realm-intro'
+include ':realm-moduleexample'
+include ':realm-gridviewexample'
+include ':realm-threadexample'
+include ':realm-adapterexample'
+include ':realm-jsonexample'
+include ':realm-encryptionexample'
+include ':realm-rxjavaexample'
+include ':moduleexample-library'
+

@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Realm-encryptionExample</string>
+    <string name="action_reset">Restart</string>
+</resources>
