@@ -17,6 +17,13 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="syncQueryNoExistingRaw"
+        android:textAllCaps="false"
+        android:text="同步查询不存在的记录"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:onClick="asyncQueryNoExistingRaw"
         android:textAllCaps="false"
         android:text="异步查询不存在的记录"/>

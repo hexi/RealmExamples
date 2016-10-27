@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     private static final String RETIRED_TEACHER = "retired_teacher";
+    private static final String UN_EXISTING_TEACHER = "un_existing_teacher";
     private Realm realm;
 
     @Override
@@ -62,11 +63,23 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "===end create===");
     }
 
+    public void syncQueryNoExistingRaw(View view) {
+        Teacher teacher = realm.where(Teacher.class)
+                .equalTo("name", UN_EXISTING_TEACHER)
+                .findFirst();
+        if (teacher != null) {
+            Log.d(TAG, String.format("===teacher,isLoaded:%b, isValid:%b",
+                    teacher.isLoaded(),
+                    teacher.isValid()));
+        } else {
+            Log.d(TAG, "===teacher is not found===");
+        }
+    }
+
     public void asyncQueryNoExistingRaw(View view) {
         Log.d(TAG, "===start asyncQueryNoExistingRaw===");
 
-        String noExistingTeacher = "FangCan";
-        countStudentsOfTeacher(noExistingTeacher)
+        countStudentsOfTeacher(UN_EXISTING_TEACHER)
                 .subscribe(new Subscriber<Integer>() {
                     @Override
                     public void onCompleted() {
