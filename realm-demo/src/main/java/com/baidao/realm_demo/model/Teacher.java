@@ -7,7 +7,7 @@ import io.realm.RealmObject;
  * Created by hexi on 16/10/27.
  */
 
-public class Teacher extends RealmObject {
+public class Teacher extends RealmObject implements Person {
     private String name;
 
     public String getName() {
