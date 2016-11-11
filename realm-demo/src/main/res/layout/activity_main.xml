@@ -41,4 +41,11 @@
         android:onClick="queryRetiredTeacher"
         android:text="查询退休老师的记录"
         android:textAllCaps="false"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="addTeacher"
+        android:text="addTeacher"
+        android:textAllCaps="false"/>
 </LinearLayout>

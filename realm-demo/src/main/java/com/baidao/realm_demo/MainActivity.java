@@ -8,6 +8,8 @@ import android.view.View;
 import com.baidao.realm_demo.model.Student;
 import com.baidao.realm_demo.model.Teacher;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import io.realm.Realm;
 import rx.Observable;
 import rx.Subscriber;
@@ -34,10 +36,31 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        addTeacher(null);
+
+        addARetiredTeacher();
+
+        Log.d(TAG, "===end create===");
+    }
+
+    private void addARetiredTeacher() {
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                for (int i = 0; i < 2; i++) {
+                Teacher teacher = realm.createObject(Teacher.class);
+                teacher.setName(RETIRED_TEACHER);
+            }
+        });
+    }
+
+    private AtomicInteger counter = new AtomicInteger(0);
+    public void addTeacher(View view) {
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                int startTeacher = counter.get();
+                int endTeacher = counter.addAndGet(2);
+                for (int i = startTeacher; i < endTeacher; i++) {
                     Teacher managedTeacher = realm.createObject(Teacher.class);
                     managedTeacher.setName("Teacher_" + i);
                     int studentSize = 10;
@@ -51,16 +74,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-        realm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                Teacher teacher = realm.createObject(Teacher.class);
-                teacher.setName(RETIRED_TEACHER);
-            }
-        });
-
-        Log.d(TAG, "===end create===");
     }
 
     public void syncQueryNoExistingRaw(View view) {
