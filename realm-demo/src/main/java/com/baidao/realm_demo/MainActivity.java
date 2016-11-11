@@ -148,6 +148,18 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
+    public void syncQueryExistingRaw(View view) {
+        Teacher teacher = realm.where(Teacher.class)
+                .equalTo("name", "Teacher_0")
+                .findFirst();
+        if (teacher != null) {
+            Log.d(TAG, String.format("===syncQueryExistingRaw, teacher.name:%s, teacher.students.count:%d",
+                    teacher.getName(), teacher.getStudents().size()));
+        } else {
+            Log.d(TAG, "===syncQueryExistingRaw teacher is not found===");
+        }
+    }
+
     public void asyncQueryExistingRaw(View view) {
         Log.d(TAG, "===start asyncQueryExistingRaw===");
 

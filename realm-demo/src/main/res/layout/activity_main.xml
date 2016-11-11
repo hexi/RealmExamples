@@ -31,6 +31,13 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="syncQueryExistingRaw"
+        android:text="同步查询存在的记录"
+        android:textAllCaps="false" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:onClick="asyncQueryExistingRaw"
         android:text="异步查询存在的记录"
         android:textAllCaps="false" />
