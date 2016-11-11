@@ -53,25 +53,36 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private AtomicInteger counter = new AtomicInteger(0);
+    private AtomicInteger teacherCounter = new AtomicInteger(0);
+    private AtomicInteger studentCounter = new AtomicInteger(0);
     public void addTeacher(View view) {
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                int startTeacher = counter.get();
-                int endTeacher = counter.addAndGet(2);
+                int startTeacher = teacherCounter.get();
+                int endTeacher = teacherCounter.addAndGet(2);
                 for (int i = startTeacher; i < endTeacher; i++) {
                     Teacher managedTeacher = realm.createObject(Teacher.class);
                     managedTeacher.setName("Teacher_" + i);
                     int studentSize = 10;
-                    int start = i * studentSize;
-                    int end = start + studentSize;
-                    for (int j = start; j < end; j++) {
+                    int startStudent = studentCounter.get();
+                    int endStudent = studentCounter.addAndGet(studentSize);
+                    for (int j = startStudent; j < endStudent; j++) {
                         Student managedStudent = realm.createObject(Student.class);
                         managedStudent.name = "Student_" + j;
                         managedTeacher.getStudents().add(managedStudent);
                     }
                 }
+            }
+        });
+    }
+
+    public void addStudent(View view) {
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                Student managedStudent = realm.createObject(Student.class);
+                managedStudent.name = "Student_" + studentCounter.getAndAdd(1);
             }
         });
     }
@@ -140,27 +151,45 @@ public class MainActivity extends AppCompatActivity {
     public void asyncQueryExistingRaw(View view) {
         Log.d(TAG, "===start asyncQueryExistingRaw===");
 
-        Teacher teacher = realm.where(Teacher.class)
-                .findFirst();
-        if (teacher.isValid()) {
-            countStudentsOfTeacher(teacher.getName())
-                    .subscribe(new Subscriber<Integer>() {
-                        @Override
-                        public void onCompleted() {
+//        Teacher teacher = realm.where(Teacher.class)
+//                .findFirst();
+//        if (teacher.isValid()) {
+//            countStudentsOfTeacher(teacher.getName())
+//                    .subscribe(new Subscriber<Integer>() {
+//                        @Override
+//                        public void onCompleted() {
+//
+//                        }
+//
+//                        @Override
+//                        public void onError(Throwable e) {
+//                            Log.e(TAG, "===onError ", e);
+//                        }
+//
+//                        @Override
+//                        public void onNext(Integer studentsCount) {
+//                            Log.d(TAG, "===onNext, studentCount: " + studentsCount);
+//                        }
+//                    });
+//        }
 
-                        }
+        countStudentsOfTeacher("Teacher_0")
+                .subscribe(new Subscriber<Integer>() {
+                    @Override
+                    public void onCompleted() {
 
-                        @Override
-                        public void onError(Throwable e) {
-                            Log.e(TAG, "===onError ", e);
-                        }
+                    }
 
-                        @Override
-                        public void onNext(Integer studentsCount) {
-                            Log.d(TAG, "===onNext, studentCount: " + studentsCount);
-                        }
-                    });
-        }
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(TAG, "===onError ", e);
+                    }
+
+                    @Override
+                    public void onNext(Integer studentsCount) {
+                        Log.d(TAG, "===onNext, studentCount: " + studentsCount);
+                    }
+                });
 
         Log.d(TAG, "===end asyncQueryExistingRaw===");
     }

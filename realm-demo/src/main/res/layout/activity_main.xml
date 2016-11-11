@@ -3,11 +3,11 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:orientation="vertical">
+    android:paddingTop="@dimen/activity_vertical_margin">
 
     <TextView
         android:layout_width="wrap_content"
@@ -18,34 +18,41 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="syncQueryNoExistingRaw"
-        android:textAllCaps="false"
-        android:text="同步查询不存在的记录"/>
+        android:text="同步查询不存在的记录"
+        android:textAllCaps="false" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="asyncQueryNoExistingRaw"
-        android:textAllCaps="false"
-        android:text="异步查询不存在的记录"/>
+        android:text="异步查询不存在的记录"
+        android:textAllCaps="false" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="asyncQueryExistingRaw"
-        android:textAllCaps="false"
-        android:text="异步查询存在的记录"/>
+        android:text="异步查询存在的记录"
+        android:textAllCaps="false" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="queryRetiredTeacher"
         android:text="查询退休老师的记录"
-        android:textAllCaps="false"/>
+        android:textAllCaps="false" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="addTeacher"
         android:text="addTeacher"
-        android:textAllCaps="false"/>
+        android:textAllCaps="false" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="addStudent"
+        android:text="addStudent"
+        android:textAllCaps="false" />
 </LinearLayout>
