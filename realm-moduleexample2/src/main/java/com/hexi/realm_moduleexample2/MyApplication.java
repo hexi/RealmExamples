@@ -1,4 +1,4 @@
-package com.baidao.moduleexample;
+package com.hexi.realm_moduleexample2;
 
 import android.app.Application;
 
@@ -8,7 +8,7 @@ import com.uphyca.stetho_realm.RealmInspectorModulesProvider;
 import io.realm.Realm;
 
 /**
- * Created by hexi on 16/10/24.
+ * Created by hexi on 16/11/16.
  */
 
 public class MyApplication extends Application {

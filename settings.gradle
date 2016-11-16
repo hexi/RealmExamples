@@ -1,4 +1,4 @@
-include ':app', ':realm-demo', ':unittestexample'
+include ':app', ':realm-demo', ':unittestexample', ':realm-moduleexample2', ':module-library2'
 include ':realm-intro'
 include ':realm-moduleexample'
 include ':realm-gridviewexample'
