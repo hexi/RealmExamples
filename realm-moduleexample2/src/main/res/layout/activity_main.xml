@@ -4,11 +4,11 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:orientation="vertical"
     tools:context="com.hexi.realm_moduleexample2.MainActivity">
 
     <TextView
@@ -20,21 +20,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="createDomesticAnimal"
-        android:textAllCaps="false"
-        android:text="createDomesticAnimal"/>
+        android:text="createDomesticAnimal"
+        android:textAllCaps="false" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="createZooAnimal"
-        android:textAllCaps="false"
-        android:text="createZooAnimal"/>
+        android:text="createZooAnimal"
+        android:textAllCaps="false" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="createDefaultAnimal"
-        android:textAllCaps="false"
-        android:text="createDefaultAnimal"/>
+        android:text="createDefaultAnimal"
+        android:textAllCaps="false" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="testConcurrent"
+        android:text="testConcurrent"
+        android:textAllCaps="false" />
 
 </LinearLayout>

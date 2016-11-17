@@ -63,4 +63,8 @@ public class ZooAnimalsDao {
             }
         });
     }
+
+    public Realm getRealm() {
+        return this.realm;
+    }
 }

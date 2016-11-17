@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.hexi.module_library2.dao.DomesticAnimalsDao;
 import com.hexi.module_library2.dao.ZooAnimalsDao;
+import com.hexi.module_library2.model.Elephant;
 import com.hexi.realm_moduleexample2.model.Cow;
 import com.hexi.realm_moduleexample2.model.Pig;
 import com.hexi.realm_moduleexample2.model.Snake;
@@ -49,6 +50,62 @@ public class MainActivity extends AppCompatActivity {
         });
 
         defaultRealm.close();
+    }
+
+    public void testConcurrent(View view) {
+        showStatus("===test concurrent===");
+        Realm defaultRealm = Realm.getDefaultInstance();
+        defaultRealm.executeTransactionAsync(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                Log.d(TAG, "===create Cow: " + System.currentTimeMillis());
+                realm.createObject(Cow.class);
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Realm.Transaction.OnSuccess() {
+            @Override
+            public void onSuccess() {
+                Log.d(TAG, "===create Cow success: " + System.currentTimeMillis());
+            }
+        });
+
+        try {
+            Thread.sleep(20);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+//        defaultRealm.executeTransactionAsync(new Realm.Transaction() {
+//            @Override
+//            public void execute(Realm realm) {
+//                Log.d(TAG, "===create Pig: " + System.currentTimeMillis());
+//                realm.createObject(Pig.class);
+//            }
+//        }, new Realm.Transaction.OnSuccess() {
+//            @Override
+//            public void onSuccess() {
+//                Log.d(TAG, "===create Pig success: " + System.currentTimeMillis());
+//            }
+//        });
+
+        ZooAnimalsDao.getInstance()
+                .getRealm()
+                .executeTransactionAsync(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+                        Log.d(TAG, "===create Elephant: " + System.currentTimeMillis());
+                        realm.createObject(Elephant.class);
+                    }
+                }, new Realm.Transaction.OnSuccess() {
+                    @Override
+                    public void onSuccess() {
+                        Log.d(TAG, "===create Elephant success: " + System.currentTimeMillis());
+                    }
+                });
     }
 
     @Override
