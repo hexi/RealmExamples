@@ -81,6 +81,20 @@
             android:onClick="queryAllDesk"
             android:text="queryAllDesk"
             android:textAllCaps="false" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="deleteXdfDesk"
+            android:text="deleteXdfDesk"
+            android:textAllCaps="false" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="addXdfDesk"
+            android:text="addXdfDesk"
+            android:textAllCaps="false" />
     </LinearLayout>
 
 </ScrollView>

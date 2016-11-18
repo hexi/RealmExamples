@@ -77,6 +77,48 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void deleteXdfDesk(View view) {
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                ClassRoom classRoom = realm.where(ClassRoom.class)
+                        .equalTo("id", CLASS_ROOM_XDF)
+                        .findFirst();
+                if (classRoom == null) {
+                    Log.d(TAG, "===deleteXdfDesk, classRoom not found");
+                    return;
+                }
+                realm.where(Desk.class)
+                        .equalTo("classRoom.id", classRoom.getId())
+                        .findAll()
+                        .deleteAllFromRealm();
+            }
+        });
+
+    }
+
+    public void addXdfDesk(View view) {
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                ClassRoom classRoom = realm.where(ClassRoom.class)
+                        .equalTo("id", CLASS_ROOM_XDF)
+                        .findFirst();
+                if (classRoom == null) {
+                    Log.d(TAG, "===AddXdfDesk, classRoom not found");
+                    return;
+                }
+
+                Desk desk0 = realm.copyToRealmOrUpdate(new Desk(DESK0, "我是第一张桌子"));
+                desk0.setClassRoom(classRoom);
+
+                Desk desk1 = realm.copyToRealmOrUpdate(new Desk(DESK1, "我是第二张桌子"));
+                desk1.setClassRoom(classRoom);
+
+            }
+        });
+    }
+
     public void queryXdfDesk(View view) {
         realm.where(ClassRoom.class)
                 .equalTo("id", CLASS_ROOM_XDF)
