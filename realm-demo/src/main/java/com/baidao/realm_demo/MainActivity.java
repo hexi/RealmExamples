@@ -109,11 +109,13 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
-                Desk desk0 = realm.copyToRealmOrUpdate(new Desk(DESK0, "我是第一张桌子"));
-                desk0.setClassRoom(classRoom);
+                Desk desk0 = new Desk(DESK0, "我是第一张桌子");
+                desk0.classRoom = classRoom;
+                realm.copyToRealmOrUpdate(desk0);
 
-                Desk desk1 = realm.copyToRealmOrUpdate(new Desk(DESK1, "我是第二张桌子"));
-                desk1.setClassRoom(classRoom);
+                Desk desk1 = new Desk(DESK1, "我是第二张桌子");
+                desk1.classRoom = classRoom;
+                realm.copyToRealmOrUpdate(desk1);
 
             }
         });
@@ -168,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                         Log.d(TAG, "===queryXdfDesk desk.size: " + desks.size());
                         for (Desk desk : desks) {
-                            Log.d(TAG, "===queryXdfDesk desk: " + desk.getName());
+                            Log.d(TAG, "===queryXdfDesk desk: " + desk.name);
                         }
                     }
                 });
